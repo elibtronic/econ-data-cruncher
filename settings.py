@@ -3,6 +3,8 @@
 # Base URL for DB product
 E_URL = "http://search.ebscohost.com/login.aspx?direct=true&db=bth&AN="
 
+CDB_NAME = "econ_data"
+
 #Data File locations
 DATA_BASE = "data/"
 
@@ -17,3 +19,4 @@ AN_ERROR = "AN_error/"
 #Log File locations
 LOG_BASE = "logs/"
 TOC_PROCESS = "toc_process/"
+AN_PROCESS = "an_process/"
