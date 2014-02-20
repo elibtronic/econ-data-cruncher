@@ -1,0 +1,14 @@
+
+#!/bin/bash
+
+#B soup
+sudo apt-get install python-bs4
+
+#CouchDB for localhost
+sudo apt-get install couchdb -y
+
+#Couch Python Connector
+sudo apt-get install python-setuptools
+sudo easy_install -U couchpy
+
+
