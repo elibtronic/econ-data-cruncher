@@ -3,7 +3,14 @@
 # Base URL for DB product
 E_URL = "http://search.ebscohost.com/login.aspx?direct=true&db=bth&AN="
 
+#COUCH CONFIGS
+
+CDB_USER = ""
+CDB_PASSWORD = ""
+
+CDB_HOST = "http://"+CDB_USER+":"+CDB_PASSWORD+"@localhost:5984"
 CDB_NAME = "econ_data"
+
 
 #Data File locations
 DATA_BASE = "data/"

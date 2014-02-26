@@ -9,6 +9,11 @@ sudo apt-get install couchdb -y
 
 #Couch Python Connector
 sudo apt-get install python-setuptools
+sudo easy_install -U couchdb
 sudo easy_install -U couchpy
+
+#makd necessary directions
+chmod u+x ./make_dirs
+./make_dirs
 
 

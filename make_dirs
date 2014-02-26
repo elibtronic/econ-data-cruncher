@@ -1,0 +1,10 @@
+#!/bin/bash
+mkdir data
+mkdir data/TOC_in
+mkdir data/TOC_out
+mkdir data/AN_in
+mkdir data/AN_out
+
+mkdir logs
+mkdir logs/toc_process
+mkdir logs/an_process

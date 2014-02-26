@@ -30,7 +30,8 @@ try:
 except:
     print "Folders already exist"
 
-couch = couchdb.Server()
+couch = couchdb.Server(CDB_HOST)
+
 try:
     db = couch.create(CDB_NAME)
 except:

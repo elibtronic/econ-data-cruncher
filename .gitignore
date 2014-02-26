@@ -4,6 +4,7 @@
 setting.py
 /data/*/
 /logs/*/
+*~
 
 #############
 ## Python
