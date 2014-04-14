@@ -4,3 +4,5 @@
 -TOC_out, processed files
 -AN_in, specific AN's ready for the db
 -AN_out, after AN has been put in db
+-cache, scratch directory
+-md_built, Various final outputs will be plopped here
