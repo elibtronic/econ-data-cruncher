@@ -50,40 +50,41 @@ def best_guess(dirty_affil):
     #bg = re.sub("^.","",bg)
     #bg = re.sub(".$","",bg)
 
-    return bg
+    return bg.strip()
 
 
 
+if __name__ == "__main__":
 
-couch = couchdb.Server()
-db = couch['econ_data']
-map_fun = '''function(doc) {
-  if (doc.Document_Type == "Article" && doc.Authors != null && doc.Author_Affiliations != null)
-  emit(doc.id, {ACCESSION : doc.id, AUTHORS_CLEAN : doc.Authors_Clean, ISSN : doc.ISSN, DATE : doc.Source_Clean, AFFILS : doc.Author_Affiliations_Clean, AFFIL_RAW : doc.Author_Affiliations, AUTHORS_RAW : doc.Authors});
-}'''
+    couch = couchdb.Server()
+    db = couch['econ_data_working']
+    map_fun = '''function(doc) {
+      if (doc.Document_Type == "Article" && doc.Authors != null && doc.Author_Affiliations != null)
+      emit(doc.id, {ACCESSION : doc.id, AUTHORS_CLEAN : doc.Authors_Clean, ISSN : doc.ISSN, DATE : doc.Source_Clean, AFFILS : doc.Author_Affiliations_Clean, AFFIL_RAW : doc.Author_Affiliations, AUTHORS_RAW : doc.Authors});
+    }'''
 
-print "Working on best guesses..."
-results = db.query(map_fun)
-for r in results:
-    print "."
-    art_obj = r["value"]
-    accession = art_obj['ACCESSION']
-    date = art_obj['DATE']
-    affil_raw = art_obj['AFFIL_RAW']
-    affil_clean = art_obj['AFFILS']
-    autho_raw = art_obj['AUTHORS_RAW']
-    issn = art_obj['ISSN']
-    bglist = list()
-    for df in affil_clean:
-        if re.search("and",df):
-            count += 1
-        bglist.append(best_guess(df))
-    doc = db[r.id]
-    doc['Author_Affliations_Best_Guess'] = bglist
-    db.save(doc)   
-#        print bglist
-    
-print ".fin"
-print count
+    print "Working on best guesses..."
+    results = db.query(map_fun)
+    for r in results:
+        print "."
+        art_obj = r["value"]
+        accession = art_obj['ACCESSION']
+        date = art_obj['DATE']
+        affil_raw = art_obj['AFFIL_RAW']
+        affil_clean = art_obj['AFFILS']
+        autho_raw = art_obj['AUTHORS_RAW']
+        issn = art_obj['ISSN']
+        bglist = list()
+        for df in affil_clean:
+            if re.search("and",df):
+                count += 1
+            bglist.append(best_guess(df))
+        doc = db[r.id]
+        doc['Author_Affliations_Best_Guess'] = bglist
+        db.save(doc)   
+    #        print bglist
+        
+    print ".fin"
+    print count
 
         

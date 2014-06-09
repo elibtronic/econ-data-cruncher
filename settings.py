@@ -9,7 +9,7 @@ CDB_USER = ""
 CDB_PASSWORD = ""
 
 CDB_HOST = "http://"+CDB_USER+":"+CDB_PASSWORD+"@localhost:5984"
-CDB_NAME = "econ_data"
+CDB_NAME = "econ_data_working"
 
 
 #Data File locations

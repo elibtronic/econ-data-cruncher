@@ -19,7 +19,7 @@ from bs4 import BeautifulSoup
 
 
 data_in_dir = DATA_BASE+AN_IN
-data_out_dir = DATA_BASE+AN_OUTj
+data_out_dir = DATA_BASE+AN_OUT
 data_er_dir = DATA_BASE+AN_ERROR
 log_file = open(LOG_BASE+AN_PROCESS+"log.txt","a")
 

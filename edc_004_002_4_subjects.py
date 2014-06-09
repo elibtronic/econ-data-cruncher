@@ -9,41 +9,33 @@
 import couchdb
 import re
 
-
-author_list = open("data/md_built/author_list.csv","w")
+#final_list = open("complete_data_easy.csv","w")
+sub_list = open("data/md_built/subject_list.csv","w")
 couch = couchdb.Server()
-db = couch['econ_data_working']
+db = couch['econ_data']
 map_fun = '''function(doc) {
   if (doc.Document_Type == "Article" && doc.Authors != null && doc.Author_Affiliations != null)
-  emit(doc.id, {ACCESSION : doc.id, ISSN : doc.ISSN, AUTHOR_AFFILIATIONS_BEST_GUESS : doc.Author_Affliations_Best_Guess});
+  emit(doc.id, {ACCESSION : doc.id, ISSN : doc.ISSN, SUBJECT: doc.Subject_Terms_Clean});
 }'''
 
 count = 0
-print "Working on author/affiliation metadata..."
+
 results = db.query(map_fun)
 for r in results:
-    print "."
     count += 1
     art_obj = r["value"]
     accession = art_obj['ACCESSION']
     issn = art_obj['ISSN']
 
-    line_out = "\""+str(accession[0])+"\",\""+str(issn[0])+"\""
-
-    for a in art_obj['AUTHOR_AFFILIATIONS_BEST_GUESS']:
-        atemp = re.sub("\"","",a)
-        f_line = line_out + ",\"" + atemp + "\"\n"
-        author_list.write(f_line)
-        author_list.flush()
-
-    
-##    if 'SUBJECT' in art_obj.keys():
-##        for s in art_obj['SUBJECT']:
-##            line_out += s + ","
-##    else:
-##        line_out += ", NO_SUBJECTS"
+    line_out = str(accession[0])+","+str(issn[0])
+    if 'SUBJECT' in art_obj.keys():
+        for s in art_obj['SUBJECT']:
+            sub_list.write(line_out + "," + s + "\n")
+    else:
+        sub_list.write(line_out + ", NO_SUBJECTS\n")
         
-
+    #sub_list.write(line_out+"\n")
+    sub_list.flush()
 
 ##    for af in affil_clean:
 ##        print count," ::: ",str(accession[0])+','+str(issn[0])+','+str(date[0])+',\"'+str(af)+'\"'
@@ -69,5 +61,3 @@ for r in results:
         
 
     #        print str(accession[0]),str(issn[0]),str(date[0]),'\"'+a+'\"'
-
-print ".fin\n"

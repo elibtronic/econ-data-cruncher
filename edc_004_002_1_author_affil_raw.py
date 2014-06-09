@@ -16,8 +16,15 @@ couch = couchdb.Server()
 db = couch['econ_data']
 map_fun = '''function(doc) {
   if (doc.Document_Type == "Article" && doc.Authors != null && doc.Author_Affiliations != null)
-  emit(doc.id, {ACCESSION : doc.id, ISSN : doc.ISSN, DATE : doc.Source_Clean, AFFILS : doc.Author_Affiliations_Clean, AFFIL_RAW : doc.Author_Affiliations, AUTHORS_RAW : doc.Authors});
+  emit(doc.id, {ACCESSION : doc.id, ISSN : doc.ISSN, DATE : doc.Source_Clean, AFFIL_RAW : doc.Author_Affiliations_Clean, AFFILS : doc.Author_Affiliations, AUTHORS_RAW : doc.Authors});
 }'''
+
+#Original
+##map_fun = '''function(doc) {
+##  if (doc.Document_Type == "Article" && doc.Authors != null && doc.Author_Affiliations != null)
+##  emit(doc.id, {ACCESSION : doc.id, ISSN : doc.ISSN, DATE : doc.Source_Clean, AFFILS : doc.Author_Affiliations_Clean, AFFIL_RAW : doc.Author_Affiliations, AUTHORS_RAW : doc.Authors});
+##}'''
+
 
 results = db.query(map_fun)
 print "Computing List of matched Authors & Affiliations..."
