@@ -2,7 +2,7 @@
 # Ignore actual data and config files
 #
 
-setting.py
+settings.py
 /data/*/
 /logs/*/
 *~
