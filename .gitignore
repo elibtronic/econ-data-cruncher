@@ -1,6 +1,7 @@
 #
 # Ignore actual data and config files
 #
+
 setting.py
 /data/*/
 /logs/*/

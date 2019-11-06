@@ -5,11 +5,11 @@ E_URL = "http://search.ebscohost.com/login.aspx?direct=true&db=bth&AN="
 
 #COUCH CONFIGS
 
-CDB_USER = "admin"
-CDB_PASSWORD = "J7mPxZC6mr"
+CDB_USER = ""
+CDB_PASSWORD = ""
 
-CDB_HOST = "http://"+CDB_USER+":"+CDB_PASSWORD+"@rtod.library.brocku.ca:32771/"
-CDB_NAME = "econ_data_working"
+CDB_HOST = "http://"+CDB_USER+":"+CDB_PASSWORD+"@localhost:5984"
+CDB_NAME = ""
 
 
 #Data File locations
