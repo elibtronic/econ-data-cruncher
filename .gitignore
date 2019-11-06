@@ -5,6 +5,7 @@ setting.py
 /data/*/
 /logs/*/
 *~
+.DS_Store
 
 #############
 ## Python
